@@ -8,20 +8,26 @@ import Typography from '@material-ui/core/Typography';
 import axios from 'axios'
 
 import Loading from '../component/Loading'
+import UserImage from '../component/UserImages'
 
 const useStyles = makeStyles(theme => ({
     card: {
+      display: "flex",
+      flexDirection: "column",
+    },
+    outer: {
+      display: "flex",
       border: "1px solid #cbced1",
       fontSize: "10px",
       marginTop: "10px",
       marginBottom: "20px"
-
     },
     cover: {
       width: 200,
       borderRadius: 100,
       padding: "10px"
     }
+    
   }));
 
 export default function Homepage(){
@@ -35,7 +41,6 @@ export default function Homepage(){
         // console.log(result.data)
         const results = result.data
         setUsers(results)
-        console.log(results)
         setIsLoading(false)
     })
     .catch(error => {
@@ -49,34 +54,35 @@ export default function Homepage(){
     return (
         <>
             <Typography variant="h2" align="center">My Homepage</Typography>           
-            <div>
+            <div >
                 {users.map(user => (
-                <Card className={classes.card} id={user.id}>
+                <Card className={classes.outer} id={user.id}>
+                    <div className={classes.card} style={{border: "1px solid black", width: "300px"}}>
+                        <div>
+                            <CardContent id={user.id}>
+                                <Typography variant="h5" id={user.id}>
+                                    {user.username}
+                                </Typography>
+                            </CardContent>
+                        </div>                   
+                        <CardMedia
+                            component="img"
+                            className={classes.cover} 
+                            image={user.profileImage}
+                            title="User Profile" 
+                            id={user.id}
+                            style={{border: "1px solid black"}}
+                        />
+                        <div>
+                            <CardContent id={user.id}>
+                                <Button variant="contained" style={{background: "#5683b0", color: "#faf5f5"}}>See more</Button>
+                            </CardContent>
+                        </div>                              
+                    </div> 
                     <div>
-                        <CardContent id={user.id}>
-                            <Typography variant="h5" id={user.id}>
-                                {user.username}
-                            </Typography>
-                        </CardContent>
-                    </div>                   
-                    <CardMedia
-                        component="img"
-                        className={classes.cover} 
-                        image={user.profileImage}
-                        title="User Image" 
-                        id={user.id}
-                    />
-                    <div>
-                        <CardContent id={user.id}>
-                            <Button variant="contained" style={{background: "#5683b0", color: "#faf5f5"}}>See more</Button>
-                        </CardContent>
-                    </div>                     
-
+                        <UserImage userID={user.id} />
+                    </div>                                
                 </Card> 
-                ))}
-                {users.map(img => (
-                    <>
-                    </>
                 ))}
            </div>
         </>

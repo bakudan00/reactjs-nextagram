@@ -5,7 +5,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -26,12 +27,12 @@ export default function Navbar(){
       <AppBar position="static" style={{ background: "#767271"}}>
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
+            <InstagramIcon fontSize="large" />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             
           </Typography>
-          <Button color="inherit">Login</Button>
+          <ExitToAppIcon fontSize="large"/>
         </Toolbar>
       </AppBar>
     </div>
