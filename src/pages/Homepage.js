@@ -6,7 +6,9 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
+//import component
 import Loading from '../component/Loading'
 import UserImage from '../component/UserImages'
 
@@ -47,20 +49,22 @@ export default function Homepage(){
         console.log('ERROR', error)
     })
     },[])
-    
+
     if (isLoading) {
         return <Loading />;
       }
     return (
         <>
-            <Typography variant="h2" align="center">My Homepage</Typography>           
+            <br />
+            <Typography variant="h2" align="center">My Homepage</Typography>  
+            <br />         
             <div >
                 {users.map(user => (
-                <Card className={classes.outer} id={user.id}>
-                    <div className={classes.card} style={{border: "1px solid black", width: "300px"}}>
+                <Card className={classes.outer} key={user.id}>
+                    <div className={classes.card}>
                         <div>
-                            <CardContent id={user.id}>
-                                <Typography variant="h5" id={user.id}>
+                            <CardContent key={user.id}>
+                                <Typography variant="h5" key={user.id}>
                                     {user.username}
                                 </Typography>
                             </CardContent>
@@ -70,12 +74,12 @@ export default function Homepage(){
                             className={classes.cover} 
                             image={user.profileImage}
                             title="User Profile" 
-                            id={user.id}
-                            style={{border: "1px solid black"}}
+                            key={user.id}
                         />
                         <div>
-                            <CardContent id={user.id}>
-                                <Button variant="contained" style={{background: "#5683b0", color: "#faf5f5"}}>See more</Button>
+                            <CardContent key={user.id}>
+                                {/* <Buttons /> */}
+                                <Button component={Link} to={`/userProfile/${user.id}`} variant="contained" style={{background: "#5683b0", color: "#faf5f5"}}>See more</Button>
                             </CardContent>
                         </div>                              
                     </div> 
